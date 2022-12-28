@@ -60,11 +60,11 @@ config :tailwind,
 
 config :ueberauth, Ueberauth,
   providers: [
-    github: {Ueberauth.Strategy.Github, []}
+    github: {Ueberauth.Strategy.Github, [default_scope: "user,user:email,public_repo"]}
   ]
 
-config :oauth_client, :github_client_id, System.get_env("GITHUB_CLIENT_ID")
-config :oauth_secret, :github_secret, System.get_env("GITHUB_CLIENT_SECRET")
+# config :oauth_client, :github_client_id, System.get_env("GITHUB_CLIENT_ID")
+# config :oauth_secret, :github_secret, System.get_env("GITHUB_CLIENT_SECRET")
 
 config :ueberauth, Ueberauth.Strategy.Github.OAuth,
   client_id: System.get_env("GITHUB_CLIENT_ID"),
