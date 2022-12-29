@@ -5,8 +5,6 @@ defmodule DiscussWeb.AuthController do
   plug Ueberauth
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, %{"provider" => provider}) do
-    IO.inspect(auth)
-
     user_params = %{
       token: auth.credentials.token,
       email: auth.info.email,
@@ -14,10 +12,18 @@ defmodule DiscussWeb.AuthController do
     }
 
     changeset = User.changeset(%User{}, user_params)
-    sign_in(conn, changeset)
+    signin(conn, changeset)
   end
 
-  defp sign_in(conn, changeset) do
+  def signout(conn, _params) do
+    conn
+    # |> put_session(:user_id, nil)
+    |> configure_session(drop: true)
+    |> put_flash(:info, "Succesfully sing out")
+    |> redirect(to: Routes.topic_path(conn, :index))
+  end
+
+  defp signin(conn, changeset) do
     case insert_or_update_user(changeset) do
       {:ok, user} ->
         conn
