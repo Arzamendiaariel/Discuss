@@ -4,14 +4,15 @@
     <ul class="collection">
       <%= for topic <- @topics do %>
       <li class="collection-item">
-        <%= topic.title %>
+        <%= link topic.title, to: Routes.topic_path(@conn, :show, topic) %>
+        <%= if not is_nil(@conn.assigns.user) and @conn.assigns.user.id == topic.user_id do%>
         <div class="right flex gap-2">
           <%= link "Edit", to: Routes.topic_path(@conn, :edit, topic), class:
           "text-indigo-600 hover:text-indigo-200" %>
           <%= link "Delete", to: Routes.topic_path(@conn, :delete, topic), method: :delete, class:
           "text-indigo-600 hover:text-indigo-200" %>
-
         </div>
+        <% end %>
       </li>
       <% end %>
     </ul>

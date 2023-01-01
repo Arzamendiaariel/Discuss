@@ -1,6 +1,5 @@
 defmodule DiscussWeb.AuthController do
   use DiscussWeb, :controller
-  alias Discuss.User
   alias Discuss.{Repo, User}
   plug Ueberauth
 

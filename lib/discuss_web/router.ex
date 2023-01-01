@@ -18,13 +18,14 @@ defmodule DiscussWeb.Router do
   scope "/", DiscussWeb do
     pipe_through :browser
 
-    # get "/", TopicController, :index
-    # get "/topics/new", TopicController, :new
-    # post "/topics", TopicController, :create
-    # get "/topics/:id/edit", TopicController, :edit
-    # put "/topics/:id", TopicController, :update
-    # delete "topics/:id", TopicController, :delete
-    resources "/", TopicController
+    get "/", TopicController, :index
+    get "/topics/new", TopicController, :new
+    post "/topics", TopicController, :create
+    get "/topics/:id/edit", TopicController, :edit
+    put "/topics/:id", TopicController, :update
+    delete "topics/:id", TopicController, :delete
+    get "topics/:id", TopicController, :show
+    # resources "/", TopicController
   end
 
   scope "/auth", DiscussWeb do
@@ -33,6 +34,17 @@ defmodule DiscussWeb.Router do
     get "/signout", AuthController, :signout
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
+  end
+
+  scope "/comments", DiscussWeb do
+    pipe_through :browser
+
+    live "/", CommentLive.Index, :index
+    live "/new", CommentLive.Index, :new
+    live "/:id/edit", CommentLive.Index, :edit
+
+    live "/:id", CommentLive.Show, :show
+    live "/:id/show/edit", CommentLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
