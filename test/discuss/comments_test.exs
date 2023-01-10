@@ -4,7 +4,7 @@ defmodule Discuss.CommentsTest do
   alias Discuss.Comments
 
   describe "comments" do
-    alias Discuss.Comments.Comment
+    alias Discuss.Comment
 
     import Discuss.CommentsFixtures
 

@@ -6,7 +6,7 @@ defmodule Discuss.Comments do
   import Ecto.Query, warn: false
   alias Discuss.Repo
 
-  alias Discuss.Comments.Comment
+  alias Discuss.Comment
 
   @doc """
   Returns the list of comments.

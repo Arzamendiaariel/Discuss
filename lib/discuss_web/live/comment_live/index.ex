@@ -2,7 +2,7 @@ defmodule DiscussWeb.CommentLive.Index do
   use DiscussWeb, :live_view
 
   alias Discuss.Comments
-  alias Discuss.Comments.Comment
+  alias Discuss.Comment
 
   @impl true
   def mount(_params, _session, socket) do
